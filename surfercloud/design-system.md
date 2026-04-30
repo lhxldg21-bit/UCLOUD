@@ -45,7 +45,7 @@
 | Blue 7 | `--color-blue-7` | `#0645A1` | - |
 | Blue 8 | `--color-blue-8` | `#002A68` | - |
 | Blue 9 | `--color-blue-9` | `#00204E` | - |
-|| Blue 10 | `--gradient-brand` | `linear-gradient(180deg, #8EC3FF 0%, #3D89FA 100%)` | 主按钮 (Primary CTA) 垂直渐变底色 |
+| Blue 10 | `--gradient-brand` | `linear-gradient(180deg, #8EC3FF 0%, #3D89FA 100%)` | 主按钮 (Primary CTA) 垂直渐变底色 |
 
 
 ### 1.3 [AI Agent 核心规则]：跨色系与组件组合约束 (Cross-Color Component Anatomy)
@@ -172,6 +172,15 @@ font-Satoshi-Regular, Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid San
 | **半粗体** | `--font-weight-semibold`| `600` | 小标题、卡片次级标题、重要数据字段名 |
 | **粗体** | `--font-weight-bold` | `700` | 主标题 (H1-H4)、重要强调信息 |
 | **极粗体** | `--font-weight-black` | `900` | 特殊营销数字、超大字体的视觉强调焦点 |
+
+---
+
+#### 2.2.3 文本对齐基准线 (Text Alignment Baseline)
+
+为了保证云服务平台视觉上的严谨感和秩序感，默认情况下，页面中所有的标题（H1-H6）和段落正文，**必须强制左对齐 (`text-align: left`)**。
+
+- **视觉对齐铁律：** 模块标题的左边缘，必须与其下方包裹业务内容的卡片、表格、栅格容器的左边缘保持绝对的垂直对齐。
+- **禁止滥用居中：** AI 在生成代码时，**严禁**凭经验随意为 `h1`, `h2`, `.section-header` 等元素添加 `text-align: center;` 样式。除非用户上传的参考图中明确表现为居中排版，否则一律按左对齐处理。
 
 ---
 
