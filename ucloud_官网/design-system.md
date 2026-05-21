@@ -3,6 +3,18 @@
 > 本文档定义 ucloud 官网（仓库 `git@git.ucloudadmin.com:www/www-v2.git`）的网页设计规范，已与项目实际代码（`tailwind.config.ts`、`src/styles/globals.css`、`src/components/Button/*`、`src/components/CommonLayout.tsx`）完全对齐。
 > 💡 [AI Agent 核心铁律]：生成代码时，**优先复用项目已存在的 CSS 变量、Tailwind 简写色、@layer 工具类与 React 组件**，严禁自行发明 token、严禁硬编码 HEX/像素值（已被 token 覆盖的部分）。
 
+> 🚨 **[零号铁律 · 优先级最高 · 默认文案左对齐]**
+> 所有 AI 生成的页面、区块、Hero、卡片、表单、列表、CTA 组——**文字、按钮、图文组合一律默认左对齐**：`text-left` / `items-start` / `justify-start`。
+> **唯一允许居中的条件**：用户在**当前对话**中**显式书面要求**使用「居中 / 水平居中 / center / 让 XX 居中」等明确指令；此时才可用 `text-center` / `items-center` / `justify-center` / `mx-auto`（针对文本与图文组合）。
+> ❌ **以下情况一律视为生成失败**（违反本条优先级高于其它一切视觉直觉）：
+>  - 「Hero 区域我觉得居中更有冲击力」「营销页惯例都是居中」「这个卡片内容少居中好看」——任何**自我推断**的居中
+>  - 沿用 v0/某模板的居中布局却没有得到对话中明确许可
+>  - 把单个孤立按钮 `mx-auto` 居中（除非用户明确要求）
+> ✅ **不受本条限制的居中**（属于布局机制，非「文案居中」）：
+>  - 容器整体水平居中（`.adaptive-content-wrap` / `.content-wrap` 自带的 `mx-auto`，作用于 max-width 1440 容器本身）
+>  - 行内元素与图标的**纵向对齐**（`items-center` 用于 flex 行内 icon 与文字基线对齐时）
+>  - 表格单元格、Tag、Badge 等**原子组件内部**的字符居中
+
 ---
 
 ## 〇、项目架构概览（Stack & Conventions）
@@ -127,10 +139,11 @@ font-family: "PingFang SC", "Hiragino Sans GB", "微软雅黑", "Microsoft Yahei
 
 > 仓库**没有** spacing token，全部使用 Tailwind 任意值（`mt-[24px]`、`gap-[32px]` 等）。下表是**设计稿规定的固定间距**，AI 生成时直接落到任意值即可。
 
-### 3.1 全局对齐定律
+### 3.1 全局对齐定律（呼应零号铁律）
 
-- **默认左对齐**：所有标题/正文/CTA/图文卡 → `text-left` / `items-start`。
-- **不得自动居中**：仅在收到「居中」「Hero 大标」明确指令时才用 `text-center` / `items-center`。
+- **默认左对齐**：所有标题/正文/CTA/图文卡 → `text-left` / `items-start` / `justify-start`。
+- **不得自动居中**：除非当前对话**显式要求**（「居中」/「center」/「让 XX 水平居中」），否则一律不得使用 `text-center` / `items-center` / `justify-center` / `mx-auto`（针对内容元素，不含 1440 容器自身）。详见文档顶部的零号铁律。
+- **图文行内 flex** 需要图标与文字基线对齐时，`items-center` 是布局机制不算「文案居中」，可正常使用。
 
 ### 3.2 段落内（标题 → 正文 → 链接/按钮）垂直间距
 
